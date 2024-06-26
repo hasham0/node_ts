@@ -10,8 +10,7 @@ import { congif } from "./constant";
                 console.log(`db connect at port ${port}`);
                 console.log(`server start at Port ${congif.Port}`);
             });
-        } catch (error) {
-            console.log(error);
+        } catch (_error) {
             process.exit(1);
         }
     }))();
