@@ -1,10 +1,17 @@
 import app from "./app";
+import connectDB from "./configuration/dbConnection";
 import { congif } from "./constant";
 
-const startServer = (): void => {
-    app.listen(congif.port, () => {
-        console.log(`server start at port ${congif.port}`);
-    });
-};
-
-startServer();
+(async () =>
+    connectDB().then((resolve) => {
+        try {
+            app.listen(congif.Port, () => {
+                const { port } = resolve.connection;
+                console.log(`db connect at port ${port}`);
+                console.log(`server start at Port ${congif.Port}`);
+            });
+        } catch (error) {
+            console.log(error);
+            process.exit(1);
+        }
+    }))();
